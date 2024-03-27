@@ -1,17 +1,17 @@
 # Mini Excel
 
 ## Simple Table
-![1PNG](./1.png)
+![1PNG](images/1.png)
 
 ## List commands
-![2PNG](./2.png)
+![2PNG](images/2.png)
 
 ## Implement various methods
 [Methods to be implemented](./method.h)
 
-![3PNG](./3.png)
+![3PNG](images/3.png)
 
 ## Hot Compiling
-![4PNG](./4.png)
-![5PNG](./5.png)
-![6PNG](./6.png)
+![4PNG](images/4.png)
+![5PNG](images/5.png)
+![6PNG](images/6.png)
