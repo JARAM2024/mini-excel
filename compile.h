@@ -23,8 +23,6 @@ enum COMPILE_RESULT compile(char const* const code, void** lib_handle) {
   if (code == NULL) return COMPILE_RESULT_FAIL;
   if (buffer == NULL) return COMPILE_RESULT_FAIL;
 
-  char* argv[] = {"/usr/bin/clang", "-xc", "-", "-shared", "-o", buffer, NULL};
-
   int inputfd[2];
   pipe(inputfd);
 
@@ -35,7 +33,11 @@ enum COMPILE_RESULT compile(char const* const code, void** lib_handle) {
     close(inputfd[0]);
     close(inputfd[1]);
 
-    execv("/usr/bin/clang", argv);
+    char* const compiler_path = getenv("CC");
+    if (compiler_path == NULL) return COMPILE_ERR_COMPILER_NOT_FOUND;
+    char* const argv[] = {compiler_path, "-xc", "-", "-shared", "-o", buffer, NULL};
+
+    execv(compiler_path, argv);
     result = COMPILE_ERR_COMPILER_NOT_FOUND;
     goto CLEANUP;
   } else {
