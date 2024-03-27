@@ -15,6 +15,7 @@ enum TABLE_RESULT {
   TABLE_ERR_INVALID_INDEX_ROW,
   TABLE_ERR_INVALID_INDEX_COL,
   TABLE_ERR_COMMAND_NOT_FOUND,
+  TABLE_ERR_NOT_IMPLEMENTED,
   TABLE_RESULT_LEGNTH,
 };
 
@@ -29,6 +30,7 @@ char* table_result_messages[TABLE_RESULT_LEGNTH] = {
   [TABLE_ERR_INVALID_INDEX_ROW] = "Index row is too big for this table",
   [TABLE_ERR_INVALID_INDEX_COL] = "Index col is too big for this table",
   [TABLE_ERR_COMMAND_NOT_FOUND] = "Such command does not exist",
+  [TABLE_ERR_NOT_IMPLEMENTED] = "Not implemented yet",
 };
 
 struct table {

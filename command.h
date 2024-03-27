@@ -4,7 +4,10 @@
 #include "common.h"
 #include "table.h"
 #include "method.h"
+
+#ifndef _MSC_VER
 #include "compile.h"
+#endif
 
 struct command_list {
   size_t length;
@@ -84,6 +87,7 @@ enum TABLE_RESULT run_command(struct table* table, int* result) {
 WHILE_OUT:
 
   if (is_new_command_method) {
+#ifndef _MSC_VER
     if (new_command_name == NULL || new_command_source == NULL) {
       fprintf(stderr, "new_command_name: %s, new_command_source: %s\n", new_command_name, new_command_source);
       return TABLE_RESULT_FAIL;
@@ -97,6 +101,10 @@ WHILE_OUT:
     }
 
     add_command(lib_handle, new_command_name);
+#else
+    fprintf(stderr, "new_comamnd is not available for windows now.\n");
+    return TABLE_ERR_NOT_IMPLEMENTED;
+#endif
 
     return run_command(table, result);
   }
@@ -122,7 +130,7 @@ enum TABLE_RESULT find_command(struct command* command, char const* const name) 
 }
 
 void init_commands() {
-  command_list.length = 6;
+  command_list.length = 7;
   command_list.capacity = 8;
   command_list.data = (struct command* )malloc(sizeof(struct command) * command_list.capacity);
 
@@ -155,8 +163,14 @@ void init_commands() {
     .name = "delete",
     .function = delete,
   };
+
+  command_list.data[6] = (struct command) {
+    .name = "not_implemented",
+    .function = notimplemented,
+  };
 }
 
+#ifndef _MSC_VER
 void add_command(void* handle, char const* function_name) {
   if (handle == NULL || function_name == NULL) return;
 
@@ -179,5 +193,6 @@ void add_command(void* handle, char const* function_name) {
   
   ++command_list.length;
 }
+#endif
 
 #endif

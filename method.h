@@ -41,7 +41,7 @@ struct list_parameter {
 };
 
 typedef enum TABLE_RESULT (* method)(struct table* table, struct method_parameter* parameter);
-#define TABLE_FUNCTION(X, Y) enum TABLE_RESULT X (struct table* table, struct method_parameter* parameter) { Y }
+#define TABLE_FUNCTION(X, Y) enum TABLE_RESULT X (struct table* table, struct method_parameter* parameter) { Y; return TABLE_ERR_NOT_IMPLEMENTED; }
 
 TABLE_FUNCTION(sum, {
   if (table == NULL) return TABLE_ERR_TABLE_IS_NULL;
@@ -96,5 +96,7 @@ TABLE_FUNCTION(delete, {
 
   return TABLE_RESULT_OK;
 })
+
+TABLE_FUNCTION(notimplemented, )
 
 #endif
