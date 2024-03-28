@@ -1,13 +1,4 @@
-#ifndef __LIST_H
-#define __LIST_H
-
-#include "common.h"
-
-struct list {
-  struct list* next;
-  struct list* prev;
-  int data;
-};
+#include "list.h"
 
 void list_append(struct list* list, int input) {
   while (list->next != NULL) {
@@ -69,5 +60,3 @@ void list_set(struct list* list, size_t index, int input) {
 
   list->data = input;
 }
-
-#endif

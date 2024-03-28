@@ -1,16 +1,4 @@
-#ifndef __COMPILE_H
-#define __COMPILE_H
-
-#include "common.h"
-
-enum COMPILE_RESULT {
-  COMPILE_RESULT_OK,
-  COMPILE_RESULT_FAIL,
-  COMPILE_ERR_COMPILER_NOT_FOUND,
-  COMPILE_ERR_FAIL_TO_LOAD_PLUGIN,
-};
-
-#define HEADER(X) "#include \""#X"\"\n"
+#include "compile.h"
 
 char const* const headers = HEADER(common.h) HEADER(table.h) HEADER(method.h);
 
@@ -33,7 +21,7 @@ enum COMPILE_RESULT compile(char const* const code, void** lib_handle) {
     close(inputfd[0]);
     close(inputfd[1]);
 
-    char* const compiler_path = getenv("CC");
+    char* const compiler_path = CMAKE_C_COMPILER;
     if (compiler_path == NULL) return COMPILE_ERR_COMPILER_NOT_FOUND;
     char* const argv[] = {compiler_path, "-xc", "-", "-shared", "-o", buffer, NULL};
 
@@ -66,5 +54,3 @@ CLEANUP:
   free(buffer);
   return result;
 }
-
-#endif

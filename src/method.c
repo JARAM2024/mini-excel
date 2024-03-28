@@ -1,16 +1,4 @@
-#ifndef __METHOD_H
-#define __METHOD_H
-
-#include "common.h"
-#include "table.h"
-
-enum PARAMETER_TYPE {
-  PARAMETER_NULL_TYPE,
-  PARAMETER_POINT_TYPE,
-  PARAMETER_BOX_TYPE,
-  PARAMETER_LIST_TYPE,
-  PARAMETER_TYPE_LENGTH,
-};
+#include "method.h"
 
 char const* parameter_type_string[PARAMETER_TYPE_LENGTH] = {
   [PARAMETER_NULL_TYPE] = "NULL",
@@ -18,44 +6,6 @@ char const* parameter_type_string[PARAMETER_TYPE_LENGTH] = {
   [PARAMETER_BOX_TYPE] = "box",
   [PARAMETER_LIST_TYPE] = "list",
 };
-
-struct method_parameter {
-  enum PARAMETER_TYPE type;
-  int* result;
-};
-
-struct point_parameter {
-  enum PARAMETER_TYPE type;
-  int* result;
-  size_t i_row;
-  size_t i_col;
-  int set;
-};
-
-struct box_parameter {
-  enum PARAMETER_TYPE type;
-  int* result;
-  size_t i_row;
-  size_t i_col;
-  size_t n_rows;
-  size_t n_cols;
-  int set;
-};
-
-struct list_parameter {
-  enum PARAMETER_TYPE type;
-  int* result;
-  size_t i_row;
-  size_t i_col;
-  size_t length;
-  int* list;
-};
-
-typedef enum TABLE_RESULT (* method)(struct table* table, struct method_parameter* parameter);
-#define TABLE_FUNCTION(X, Y) enum TABLE_RESULT X (struct table* table, struct method_parameter* parameter) { \
-  if (table == NULL) return TABLE_ERR_TABLE_IS_NULL; \
-  if (table->data == NULL) return TABLE_ERR_DATA_IS_NULL; \
-  Y; return TABLE_ERR_NOT_IMPLEMENTED; }
 
 // Input: table (struct parameter* ), 
 //        parameter (struct method_parameter* )
@@ -267,4 +217,3 @@ void clean_parameter(struct method_parameter* parameter) {
   }
 }
 
-#endif

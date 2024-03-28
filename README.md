@@ -1,5 +1,7 @@
 # Mini Excel
 
+[How to Build](#how-to-build)
+
 ## Simple Table
 ![1PNG](images/1.png)
 
@@ -36,3 +38,26 @@ Usage: \
 ![4PNG](images/4.png)
 ![5PNG](images/5.png)
 ![6PNG](images/6.png)
+
+# How to build
+
+## Windows
+### Caution
+- Hot compiling is not available now.
+
+```console
+mkdir build
+cd build
+cmake ..
+./src/mini-excel
+```
+
+## MacOS
+
+```bash
+mkdir build
+cd build
+cmake ..
+cd ./src
+./mini-excel
+```

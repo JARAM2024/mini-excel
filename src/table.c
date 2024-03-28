@@ -1,25 +1,6 @@
-#ifndef __TABLE_H
-#define __TABLE_H
+#include "table.h"
 
-#include "common.h"
-#include "list.h"
-
-enum TABLE_RESULT {
-  TABLE_RESULT_OK,
-  TABLE_RESULT_FAIL,
-  TABLE_ERR_INPUT_IS_NULL,
-  TABLE_ERR_TABLE_IS_NULL,
-  TABLE_ERR_DATA_IS_NULL,
-  TABLE_ERR_OUTPUT_PARAMETER_NULL,
-  TABLE_ERR_ELEMENTS_PARAMETER_INEFFICIENT,
-  TABLE_ERR_INVALID_INDEX_ROW,
-  TABLE_ERR_INVALID_INDEX_COL,
-  TABLE_ERR_COMMAND_NOT_FOUND,
-  TABLE_ERR_NOT_IMPLEMENTED,
-  TABLE_RESULT_LEGNTH,
-};
-
-char* table_result_messages[TABLE_RESULT_LEGNTH] = {
+char const* table_result_messages[TABLE_RESULT_LEGNTH] = {
   [TABLE_RESULT_OK] = "This table method is ok",
   [TABLE_RESULT_FAIL] = "This table method is failed",
   [TABLE_ERR_INPUT_IS_NULL] = "There is no input",
@@ -31,13 +12,6 @@ char* table_result_messages[TABLE_RESULT_LEGNTH] = {
   [TABLE_ERR_INVALID_INDEX_COL] = "Index col is too big for this table",
   [TABLE_ERR_COMMAND_NOT_FOUND] = "Such command does not exist",
   [TABLE_ERR_NOT_IMPLEMENTED] = "Not implemented yet",
-};
-
-struct table {
-  size_t n_rows;
-  size_t n_cols;
-
-  struct list** data;
 };
 
 enum TABLE_RESULT table_make(struct table* table, size_t n_rows, size_t n_cols) {
@@ -122,8 +96,11 @@ enum TABLE_RESULT table_add_row(struct table* table, int* elements) {
 
   int* row = (int* )malloc(sizeof(int) * table->n_cols);
 
-
   return TABLE_RESULT_OK;
 };
 
-#endif
+enum TABLE_RESULT table_add_col(struct table* table, int* elements) {
+  if (table == NULL) return TABLE_ERR_TABLE_IS_NULL;
+
+  return TABLE_RESULT_OK;
+};
