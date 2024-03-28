@@ -46,9 +46,7 @@ enum TABLE_RESULT run_command(struct table* table, int* result) {
   }
 
   size_t n_token = 0;
-  struct method_parameter parameter = {
-    .result = result,
-  };
+  struct method_parameter* parameter = NULL;
 
   char const* command_name = NULL;
   struct command command = { 0 };
@@ -78,6 +76,16 @@ enum TABLE_RESULT run_command(struct table* table, int* result) {
           new_command_source = tmp + 1;
           goto WHILE_OUT;
         }
+      case 2: {
+        enum PARAMETER_TYPE parameter_type = get_parameter_type(tok);
+        if (parameter_type == PARAMETER_NULL_TYPE)
+          goto WHILE_OUT;
+        parameter = new_parameter(parameter_type);
+        char const* const tmp = tok + strlen(tok);
+        char const* const parameter_string = tmp + 1;
+        struct_parameter(parameter, parameter_string);
+        goto WHILE_OUT;
+      }
       default:
         break;
     }
@@ -112,7 +120,13 @@ WHILE_OUT:
   int command_result = find_command(&command, command_name);
   if (command_result != TABLE_RESULT_OK) return command_result;
 
-  command_result = command.function(table, &parameter);
+  command_result = TABLE_ERR_ELEMENTS_PARAMETER_INEFFICIENT;
+  if (parameter) {
+    parameter->result = result;
+    command_result = command.function(table, parameter);
+    clean_parameeter(parameter);
+    free(parameter);
+  }
   if (command_result != TABLE_RESULT_OK) return command_result;
 
   return TABLE_RESULT_OK;
