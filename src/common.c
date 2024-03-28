@@ -1,6 +1,6 @@
 #include "common.h"
 
-#if defined _MSC_VER
+#if defined(_MSC_VER) || defined(_WIN32)
 
 void clean_terminal() {
   system("cls");

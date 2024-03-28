@@ -69,7 +69,10 @@ enum TABLE_RESULT run_command(struct table* table, int* result) {
 WHILE_OUT:
 
   if (is_new_command_method) {
-#ifndef _MSC_VER
+#if defined(_MSC_VER) || defined(_WIN32)
+    fprintf(stderr, "new_comamnd is not available for windows now.\n");
+    return TABLE_ERR_NOT_IMPLEMENTED;
+#else
     if (new_command_name == NULL || new_command_source == NULL) {
       fprintf(stderr, "new_command_name: %s, new_command_source: %s\n", new_command_name, new_command_source);
       return TABLE_RESULT_FAIL;
@@ -83,12 +86,8 @@ WHILE_OUT:
     }
 
     add_command(lib_handle, new_command_name);
-#else
-    fprintf(stderr, "new_comamnd is not available for windows now.\n");
-    return TABLE_ERR_NOT_IMPLEMENTED;
-#endif
-
     return run_command(table, result);
+#endif
   }
 
   int command_result = find_command(&command, command_name);
@@ -141,7 +140,9 @@ void init_commands() {
 
 }
 
-#ifndef _MSC_VER
+#if defined(_MSC_VER) || defined(_WIN32)
+
+#else
 void add_command(void* handle, char const* function_name) {
   if (handle == NULL || function_name == NULL) return;
 

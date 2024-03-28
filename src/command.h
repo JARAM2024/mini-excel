@@ -5,7 +5,9 @@
 #include "table.h"
 #include "method.h"
 
-#ifndef _MSC_VER
+#if defined(_MSC_VER) || defined(_WIN32)
+
+#else
 #include "compile.h"
 #endif
 

@@ -1,5 +1,8 @@
 #include "compile.h"
 
+#if defined(_MSC_VER) || defined(_WIN32)
+
+#else
 char const* const headers = HEADER(common.h) HEADER(table.h) HEADER(method.h);
 
 enum COMPILE_RESULT compile(char const* const code, void** lib_handle) {
@@ -54,3 +57,4 @@ CLEANUP:
   free(buffer);
   return result;
 }
+#endif

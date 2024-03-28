@@ -9,7 +9,7 @@
 
 void clean_terminal();
 
-#if defined _MSC_VER
+#if defined(_MSC_VER) || defined(_WIN32)
 #include <windows.h>
 #include <io.h>
 #undef max
