@@ -6,6 +6,27 @@
 ## List commands
 ![2PNG](images/2.png)
 
+## Parameter
+
+![7PNG](images/7.png)
+![8PNG](images/8.png)
+![9PNG](images/9.png)
+
+- Point Parameter
+
+Usage: \
+(command) point (row_index) (col_index) (set, default value is 0)
+
+- Box Parameter
+
+Usage: \
+(command) box (row_index) (col_index) (width) (height) (set, default value is 0)
+
+- List Parameter
+
+Usage: \
+(command ) list (length) (data1, data2, data3 ...)
+
 ## Implement various methods
 [Methods to be implemented](./method.h)
 
