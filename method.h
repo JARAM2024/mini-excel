@@ -41,11 +41,31 @@ struct list_parameter {
 };
 
 typedef enum TABLE_RESULT (* method)(struct table* table, struct method_parameter* parameter);
-#define TABLE_FUNCTION(X, Y) enum TABLE_RESULT X (struct table* table, struct method_parameter* parameter) { Y; return TABLE_ERR_NOT_IMPLEMENTED; }
+#define TABLE_FUNCTION(X, Y) enum TABLE_RESULT X (struct table* table, struct method_parameter* parameter) { \
+  if (table == NULL) return TABLE_ERR_TABLE_IS_NULL; \
+  if (table->data == NULL) return TABLE_ERR_DATA_IS_NULL; \
+  Y; return TABLE_ERR_NOT_IMPLEMENTED; }
+
+// Input: table (struct parameter* ), 
+//        parameter (struct method_parameter* )
+// 
+// Output: parameter->result (int *)
+
+TABLE_FUNCTION(set, {
+
+  // Implement code here!! 
+
+  return TABLE_RESULT_OK;
+})
+
+TABLE_FUNCTION(get, {
+
+  // Implement code here!! 
+
+  return TABLE_RESULT_OK;
+})
 
 TABLE_FUNCTION(sum, {
-  if (table == NULL) return TABLE_ERR_TABLE_IS_NULL;
-  if (table->data == NULL) return TABLE_ERR_DATA_IS_NULL;
 
   // Implement code here!! 
 
@@ -53,8 +73,6 @@ TABLE_FUNCTION(sum, {
 })
 
 TABLE_FUNCTION(average, {
-  if (table == NULL) return TABLE_ERR_TABLE_IS_NULL;
-  if (table->data == NULL) return TABLE_ERR_DATA_IS_NULL;
 
   // Implement code here!! 
 
@@ -62,8 +80,6 @@ TABLE_FUNCTION(average, {
 })
 
 TABLE_FUNCTION(max, {
-  if (table == NULL) return TABLE_ERR_TABLE_IS_NULL;
-  if (table->data == NULL) return TABLE_ERR_DATA_IS_NULL;
 
   // Implement code here!! 
 
@@ -71,8 +87,6 @@ TABLE_FUNCTION(max, {
 })
 
 TABLE_FUNCTION(min, {
-  if (table == NULL) return TABLE_ERR_TABLE_IS_NULL;
-  if (table->data == NULL) return TABLE_ERR_DATA_IS_NULL;
 
   // Implement code here!! 
 
@@ -80,8 +94,6 @@ TABLE_FUNCTION(min, {
 })
 
 TABLE_FUNCTION(append, {
-  if (table == NULL) return TABLE_ERR_TABLE_IS_NULL;
-  if (table->data == NULL) return TABLE_ERR_DATA_IS_NULL;
 
   // Implement code here!! 
 
@@ -89,8 +101,6 @@ TABLE_FUNCTION(append, {
 })
 
 TABLE_FUNCTION(delete, {
-  if (table == NULL) return TABLE_ERR_TABLE_IS_NULL;
-  if (table->data == NULL) return TABLE_ERR_DATA_IS_NULL;
 
   // Implement code here!! 
 
