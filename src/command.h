@@ -26,6 +26,6 @@ enum TABLE_RESULT find_command(struct command* , char const* const );
 void init_commands();
 void add_command(void* handle, char const* function_name);
 
-struct command_list command_list;
+extern struct command_list command_list;
 
 #endif

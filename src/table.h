@@ -18,7 +18,7 @@ enum TABLE_RESULT {
   TABLE_RESULT_LEGNTH,
 };
 
-char const* table_result_messages[TABLE_RESULT_LEGNTH];
+extern char const* table_result_messages[TABLE_RESULT_LEGNTH];
 
 struct table {
   size_t n_rows;

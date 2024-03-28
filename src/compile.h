@@ -12,7 +12,7 @@ enum COMPILE_RESULT {
 
 #define HEADER(X) "#include \""#X"\"\n"
 
-char const* const headers;
+extern char const* const headers;
 
 enum COMPILE_RESULT compile(char const* const code, void** lib_handle);
 

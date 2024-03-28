@@ -12,7 +12,7 @@ enum PARAMETER_TYPE {
   PARAMETER_TYPE_LENGTH,
 };
 
-char const* parameter_type_string[PARAMETER_TYPE_LENGTH];
+extern char const* parameter_type_string[PARAMETER_TYPE_LENGTH];
 
 struct method_parameter {
   enum PARAMETER_TYPE type;
