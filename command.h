@@ -130,44 +130,27 @@ enum TABLE_RESULT find_command(struct command* command, char const* const name) 
 }
 
 void init_commands() {
-  command_list.length = 7;
-  command_list.capacity = 8;
+  command_list.length = 9;
+  command_list.capacity = 16;
   command_list.data = (struct command* )malloc(sizeof(struct command) * command_list.capacity);
+  int index = 0;
 
-  command_list.data[0] = (struct command) {
-    .name = "sum",
-    .function = sum,
+#define ADD_COMMAND(X) \
+  command_list.data[index++] = (struct command) { \
+    .name = #X , \
+    .function = X , \
   };
 
-  command_list.data[1] = (struct command) {
-    .name = "average",
-    .function = average,
-  };
+  ADD_COMMAND(get);
+  ADD_COMMAND(set);
+  ADD_COMMAND(sum);
+  ADD_COMMAND(average);
+  ADD_COMMAND(max);
+  ADD_COMMAND(min);
+  ADD_COMMAND(append);
+  ADD_COMMAND(delete);
+  ADD_COMMAND(not_implemented);
 
-  command_list.data[2] = (struct command) {
-    .name = "max",
-    .function = max,
-  };
-
-  command_list.data[3] = (struct command) {
-    .name = "min",
-    .function = min,
-  };
-
-  command_list.data[4] = (struct command) {
-    .name = "append",
-    .function = append,
-  };
-
-  command_list.data[5] = (struct command) {
-    .name = "delete",
-    .function = delete,
-  };
-
-  command_list.data[6] = (struct command) {
-    .name = "not_implemented",
-    .function = notimplemented,
-  };
 }
 
 #ifndef _MSC_VER
