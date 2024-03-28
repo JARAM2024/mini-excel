@@ -124,7 +124,7 @@ WHILE_OUT:
   if (parameter) {
     parameter->result = result;
     command_result = command.function(table, parameter);
-    clean_parameeter(parameter);
+    clean_parameter(parameter);
     free(parameter);
   }
   if (command_result != TABLE_RESULT_OK) return command_result;

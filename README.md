@@ -25,7 +25,7 @@ Usage: \
 - List Parameter
 
 Usage: \
-(command ) list (length) (data1, data2, data3 ...)
+(command) list (length) (data1, data2, data3 ...)
 
 ## Implement various methods
 [Methods to be implemented](./method.h)

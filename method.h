@@ -259,7 +259,7 @@ enum TABLE_RESULT struct_parameter(struct method_parameter* parameter, char cons
   return TABLE_RESULT_OK;
 }
 
-void clean_parameeter(struct method_parameter* parameter) {
+void clean_parameter(struct method_parameter* parameter) {
   if (parameter->type == PARAMETER_LIST_TYPE) {
     struct list_parameter* list_parameter = 
       (struct list_parameter* )parameter;
