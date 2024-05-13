@@ -9,13 +9,13 @@ void clean_terminal() {
 #elif __APPLE__
 
 void clean_terminal() {
-  printf("\033[2J\033[3J\033[H");
+  fprintf(stderr, "\x1b[2J\x1b[H");
 }
 
 #else
 
 void clean_terminal() {
-  printf("\033[2J\033[3J\033[H");
+  fprintf(stderr, "\x1b[2J\x1b[H");
 }
 
 #endif

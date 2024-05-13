@@ -9,14 +9,21 @@ enum TABLE_RESULT run_command(struct table* table, int* result) {
 
   while ((n_read = read(STDIN_FILENO, buffer + n_size, 4095 - n_size))) {
     n_size += n_read;
-    if (n_size < 2) return TABLE_ERR_INPUT_IS_NULL;
-    if (buffer[n_size - 2] == '\\') {
-      n_size -= 2;
+    if (n_size < 1) return TABLE_ERR_INPUT_IS_NULL;
+    if (buffer[n_size - 1] == '\n') {
+      n_size -= 1;
+    }
+    if (buffer[n_size - 1] == '\\') {
+      n_size -= 1;
       continue;
     }
 
-    buffer[n_size - 1] = 0;
+    buffer[n_size] = 0;
     break;
+  }
+
+  if (n_size == 0) {
+    exit(0);
   }
 
   size_t n_token = 0;
